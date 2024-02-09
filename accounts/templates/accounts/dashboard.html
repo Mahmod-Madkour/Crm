@@ -1,0 +1,65 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+    {% include 'accounts/status.html' %}
+
+    <br>
+    <div class="row">
+        <div class="col-md-5">
+            <h5>CUSTOMERS:</h5>
+            <hr>
+            <div class="card card-body">
+                <a class="btn btn-primary btn-sm btn-block" href="">Create Customer</a>
+                <table class="table table-sm">
+                    <tr>
+                        <th>Profile</ht>
+                        <th>Customer</ht>
+                        <th>Phone</ht>
+                    </tr>
+
+                    {% for cus in customers %}
+                        <tr>
+                            <th> 
+                                <a class="btn btn-sm btn-info" href="{% url 'customer' cus.id %}"> View Profile </a>
+                            </ht>
+                            <td> {{ cus.name }} </td>
+                            <td> {{ cus.phone }} </td>
+                        </tr>
+                    {% endfor %}
+
+                </table>
+            </div>
+        </div>
+
+        <div class="col-md-7">
+            <h5>LAST 5 ORDERS:</h5>
+            <hr>
+            <div class="card card-body">
+                <table class="table table-sm">
+                    <tr>
+                        <th>Product</ht>
+                        <th>Category</ht>
+                        <th>Data Orderd</ht>
+                        <th>Status</ht>
+                        <th>Update</ht>
+                        <th>Remove</ht>
+                    </tr>
+
+                    {% for ord in orders %}
+                        <tr>
+                            <td> {{ ord.product }} </td>
+                            <td> {{ ord.product.category }} </td>
+                            <td> {{ ord.date_created }} </td>
+                            <td> {{ ord.status }} </td>
+                            <td> <a href="{% url 'update_order' ord.id %}" class="btn btn-sm btn-info"> Update </a> </td>
+                            <td> <a href="{% url 'delete_order' ord.id %}" class="btn btn-sm btn-danger"> Delete </a> </td>
+                        </tr>
+                    {% endfor %}
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

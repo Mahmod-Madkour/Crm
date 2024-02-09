@@ -1,0 +1,77 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+    <br>
+
+    <div class="row">
+        <div class="col-md">
+            <div class="card card-body">
+                <h5>Customer:</h5>
+                <hr>
+                <a class="btn btn-outline-info btn-sm btn-block" href="">Update Customer</a>
+                <a class="btn btn-outline-info btn-sm btn-block" href="{% url 'create_order' customer.id %}">Create Order</a>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card card-body">
+                <h5>Contact Information</h5>
+                <hr>
+                <p>Email : {{ customer.email }} </p>
+                <p>Phone : {{ customer.phone }} </p>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card card-body">
+                <h5>Total Orderd</h5>
+                <hr>
+                <h1 style="text-align: center; padding: 10px;"> {{ order_count }} </h1>
+            </div>
+        </div>
+    </div>
+    <br>
+        
+    <div class="row">
+        <div class="col">
+            <div class="card card-body">
+                <form method="get">
+                    {{ my_filter.form }}
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-md">
+            <div class="card card-body">
+                <table class="table table-sm">
+                    <tr>
+                        <th>Product</ht>
+                        <th>Category</ht>
+                        <th>Date Orderd</ht>
+                        <th>Status</ht>
+                        <th>Update</ht>
+                        <th>Remove</ht>
+                    </tr>
+
+                    {% for ord in orders %}
+                        <tr>
+                            <td> {{ ord.product }} </td>
+                            <td> {{ ord.product.category }} </td>
+                            <td> {{ ord.date_created }} </td>
+                            <td> {{ ord.status }} </td>
+                            <td> <a href="{% url 'update_order' ord.id %}" class="btn btn-sm btn-info"> Update </a> </td>
+                            <td> <a href="{% url 'delete_order' ord.id %}" class="btn btn-sm btn-danger"> Delete </a> </td>
+                        </tr>
+                    {% endfor %}
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
